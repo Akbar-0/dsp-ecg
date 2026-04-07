@@ -18,7 +18,8 @@
 #endif
 
 const unsigned long SERIAL_BAUD = 115200;
-const unsigned int SAMPLE_RATE_HZ = 250;
+// Match the current MATLAB software dashboard default.
+const unsigned int SAMPLE_RATE_HZ = 125;
 const unsigned long SAMPLE_PERIOD_US = 1000000UL / SAMPLE_RATE_HZ;
 
 unsigned long nextSampleMicros = 0;

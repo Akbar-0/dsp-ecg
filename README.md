@@ -1,6 +1,14 @@
 # dsp-ecg
 Real-Time ECG acquisition, plotting, R-peak detection, heart rate, and HRV in MATLAB.
 
+## Current phase: software only
+
+The active workflow is software simulation in MATLAB using:
+
+- `dsp/sim_dashboard.m`
+
+This script currently runs at `fs = 125`, so embedded defaults are aligned to `125 Hz` for consistency if hardware streaming is used later.
+
 ## Task 1: Embedded work started
 
 This repository includes a first embedded firmware target for AD8232-style ECG sensors:
@@ -54,7 +62,7 @@ Default serial baud: `115200`
 
 The firmware uses timer-based scheduling and sends samples at:
 
-- `250 Hz` (default)
+- `125 Hz` (default, aligned with current MATLAB software dashboard)
 
 You can change `SAMPLE_RATE_HZ` in the sketch.
 
