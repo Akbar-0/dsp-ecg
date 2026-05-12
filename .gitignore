@@ -53,3 +53,14 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# documentation
+*.docx
+*.pdf
+*.doc
+
+# workspace data
+*.csv
+*/*/*.csv
+*.log
+*.log.*

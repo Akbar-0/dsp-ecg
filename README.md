@@ -64,35 +64,42 @@ A comprehensive electrocardiogram (ECG) signal processing and analysis system de
 - **Serial Connection**: USB cable matching your microcontroller
 
 ### Quick Setup (Firmware Only)
+
+Clone this repository:
 ```bash
-# 1. Clone this repository
 git clone https://github.com/Akbar-0/dsp-ecg.git
 cd dsp-ecg
-
-# 2. Open Arduino IDE
-# 3. Load embedded/esp32_ad8232_streamer.ino
-# 4. Select your board and COM port
-# 5. Upload and verify in Serial Monitor (115200 baud)
 ```
+
+Open [src/embedded/esp32_ad8232_streamer.ino](src/embedded/esp32_ad8232_streamer.ino) in Arduino IDE, select your board and COM port, upload (115200 baud), then verify output in Serial Monitor (115200 baud).
 
 ### Quick Setup (With MATLAB/Octave Dashboard)
+
+Clone this repository:
 ```bash
-# 1. Clone repository
 git clone https://github.com/Akbar-0/dsp-ecg.git
 cd dsp-ecg
-
-# 2. Open MATLAB or Octave
-# 3. Navigate to dsp/ folder
-cd dsp
-
-# 4. Run one of the dashboard scripts
-% In MATLAB/Octave console:
-run ecg_dashboard        % Main dashboard
-
-% Or with existing data:
-% It will prompt you to select a data file
-% Choose from: data/recorded_real_time/*.csv
 ```
+
+**MATLAB (core dashboards)**:
+- [dashboard_app.m](src/dsp/MATLAB/workspace/dashboard_app.m)
+- [ecg_dashboard.m](src/dsp/MATLAB/workspace/ecg_dashboard.m)
+
+**Octave (full dashboards + stream handlers)**:
+- [dashboard_app.m](src/dsp/Octave/workspace/dashboard_app.m)
+- [ecg_dashboard.m](src/dsp/Octave/workspace/ecg_dashboard.m)
+- [ecg_dashboard_1a.m](src/dsp/Octave/workspace/ecg_dashboard_1a.m)
+- [ecg_dashboard_raw.m](src/dsp/Octave/workspace/ecg_dashboard_raw.m)
+- [stream_a.m](src/dsp/Octave/workspace/stream_a.m)
+- [stream_b.m](src/dsp/Octave/workspace/stream_b.m)
+- [stream_c.m](src/dsp/Octave/workspace/stream_c.m)
+
+Run a dashboard (example):
+```matlab
+cd src/dsp/Octave/workspace
+run ecg_dashboard
+```
+For recorded data, select a CSV from data/recorded_real_time.
 
 ### Expected Output (Firmware)
 ```
@@ -106,34 +113,37 @@ run ecg_dashboard        % Main dashboard
 ## Project Architecture
 
 ### Directory Structure (Current)
-```
-ecg_dsp/
-├── dsp/                                      # Octave/MATLAB DSP module (Active)
-│   ├── dashboard_app.m                       # ECG dashboard application
-│   ├── ecg_dashboard.m                       # Main dashboard script
-│   ├── ecg_dashboard_1a.m                    # Variant 1a
-│   ├── ecg_dashboard_raw.m                   # Raw signal processing
-│   ├── stream_a.m                            # Data stream handler A
-│   ├── stream_b.m                            # Data stream handler B
-│   └── stream_c.m                            # Data stream handler C
-│
-├── embedded/                                 # Microcontroller firmware
-│   └── esp32_ad8232_streamer.ino             # Arduino sketch for AD8232 sensor
-│
-├── data/                                     # Real ECG recordings (NEW)
-│   └── recorded_real_time/                   # Time-stamped ECG data files
-│       ├── ECG_20260510_001229 (baseline - still).csv
-│       ├── ECG_20260510_003618 (artifact - walking).csv
-│       ├── ECG_20260510_004523 (artifact - hand swing).csv
-│       ├── ECG_20260510_005729 (artifact - tapping patches).csv
-│       ├── ECG_20260510_012003 (artifact - rapid breathing).csv
-│       └── ECG_20260511_230935 (raw - no filter).csv
-│
-├── README.md                                 # This file
-├── LICENSE                                   # MIT License
-├── .gitignore                                # Git ignore rules
-└── ECG_MiniProject_Task1_Task2_Submission_Template.docx
-```
+
+- src/
+  - dsp/
+    - MATLAB/workspace/
+      - [dashboard_app.m](src/dsp/MATLAB/workspace/dashboard_app.m)
+      - [ecg_dashboard.m](src/dsp/MATLAB/workspace/ecg_dashboard.m)
+    - Octave/workspace/
+      - [dashboard_app.m](src/dsp/Octave/workspace/dashboard_app.m)
+      - [ecg_dashboard.m](src/dsp/Octave/workspace/ecg_dashboard.m)
+      - [ecg_dashboard_1a.m](src/dsp/Octave/workspace/ecg_dashboard_1a.m)
+      - [ecg_dashboard_raw.m](src/dsp/Octave/workspace/ecg_dashboard_raw.m)
+      - [stream_a.m](src/dsp/Octave/workspace/stream_a.m)
+      - [stream_b.m](src/dsp/Octave/workspace/stream_b.m)
+      - [stream_c.m](src/dsp/Octave/workspace/stream_c.m)
+  - embedded/
+    - [esp32_ad8232_streamer.ino](src/embedded/esp32_ad8232_streamer.ino)
+- data/
+  - recorded_real_time/
+    - [ECG_20260510_001229 (baseline - still).csv](data/recorded_real_time/ECG_20260510_001229%20%28baseline%20-%20still%29.csv)
+    - [ECG_20260510_003618 (artifact - walking).csv](data/recorded_real_time/ECG_20260510_003618%20%28artifact%20-%20walking%29.csv)
+    - [ECG_20260510_004523 (artifact - hand swing).csv](data/recorded_real_time/ECG_20260510_004523%20%28artifact%20-%20hand%20swing%29.csv)
+    - [ECG_20260510_005729 (artifact - tapping patches).csv](data/recorded_real_time/ECG_20260510_005729%20%28artifact%20-%20tapping%20patches%29.csv)
+    - [ECG_20260510_012003 (artifact - rapid breathing).csv](data/recorded_real_time/ECG_20260510_012003%20%28artifact%20-%20rapid%20breathing%29.csv)
+    - [ECG_20260511_230935 (raw - no filter).csv](data/recorded_real_time/ECG_20260511_230935%20%28raw%20-%20no%20filter%29.csv)
+- src_combined/
+  - [scripts_combined.m](src_combined/scripts_combined.m)
+  - [scripts_combined.py](src_combined/scripts_combined.py)
+- [ECG_MiniProject_Task1_Task2_Submission_Template.docx](ECG_MiniProject_Task1_Task2_Submission_Template.docx)
+- [README.md](README.md)
+- [LICENSE](LICENSE)
+- [.gitignore](.gitignore)
 
 ### System Diagram
 ```
@@ -216,7 +226,7 @@ For single-lead ECG (3-electrode):
 
 **Step 1**: Open the sketch
 - Arduino IDE → File → Open
-- Navigate to: `embedded/esp32_ad8232_streamer/esp32_ad8232_streamer.ino`
+- Navigate to: [src/embedded/esp32_ad8232_streamer.ino](src/embedded/esp32_ad8232_streamer.ino)
 
 **Step 2**: Configure board settings
 - **For ESP32**:
@@ -246,7 +256,7 @@ For single-lead ECG (3-electrode):
 
 ## Software Components
 
-### Embedded Firmware: esp32_ad8232_streamer.ino
+### Embedded Firmware: [esp32_ad8232_streamer.ino](src/embedded/esp32_ad8232_streamer.ino)
 
 **Purpose**: Real-time ECG data acquisition and serial streaming
 
@@ -270,17 +280,27 @@ const unsigned int LEAD_OFF_MINUS_PIN = 26;    // Lead-off detect (-)
 millis,raw,leadOff
 ```
 
-### MATLAB/Octave DSP Module (dsp/)
+### DSP Workspaces (src/dsp/)
 
-**Available Scripts**:
+**MATLAB Workspace (src/dsp/MATLAB/workspace)**:
 
-1. **dashboard_app.m** - Complete ECG dashboard application
-2. **ecg_dashboard.m** - Main dashboard with visualization
-3. **ecg_dashboard_1a.m** - Alternative dashboard variant 1a
-4. **ecg_dashboard_raw.m** - Raw signal processing and display
-5. **stream_a.m** - Data stream handler A
-6. **stream_b.m** - Data stream handler B
-7. **stream_c.m** - Data stream handler C
+1. [dashboard_app.m](src/dsp/MATLAB/workspace/dashboard_app.m) - Complete ECG dashboard application
+2. [ecg_dashboard.m](src/dsp/MATLAB/workspace/ecg_dashboard.m) - Main dashboard with visualization
+
+**Octave Workspace (src/dsp/Octave/workspace)**:
+
+1. [dashboard_app.m](src/dsp/Octave/workspace/dashboard_app.m) - Complete ECG dashboard application
+2. [ecg_dashboard.m](src/dsp/Octave/workspace/ecg_dashboard.m) - Main dashboard with visualization
+3. [ecg_dashboard_1a.m](src/dsp/Octave/workspace/ecg_dashboard_1a.m) - Alternative dashboard variant 1a
+4. [ecg_dashboard_raw.m](src/dsp/Octave/workspace/ecg_dashboard_raw.m) - Raw signal processing and display
+5. [stream_a.m](src/dsp/Octave/workspace/stream_a.m) - Data stream handler A
+6. [stream_b.m](src/dsp/Octave/workspace/stream_b.m) - Data stream handler B
+7. [stream_c.m](src/dsp/Octave/workspace/stream_c.m) - Data stream handler C
+
+**Combined Scripts (src_combined)**:
+
+- [scripts_combined.m](src_combined/scripts_combined.m)
+- [scripts_combined.py](src_combined/scripts_combined.py)
 
 **Features**:
 - Real-time ECG visualization
@@ -290,13 +310,18 @@ millis,raw,leadOff
 - Raw and filtered display options
 - Integration with hardware or CSV data
 
-**To Use**:
+**To Use (Octave)**:
 ```octave
-% Octave or MATLAB
-cd dsp
-run ecg_dashboard           % Run main dashboard
-run dashboard_app           % Alternative application
-% Or run other scripts as needed
+cd src/dsp/Octave/workspace
+run ecg_dashboard
+run dashboard_app
+```
+
+**To Use (MATLAB)**:
+```matlab
+cd src/dsp/MATLAB/workspace
+run ecg_dashboard
+run dashboard_app
 ```
 
 ### Data Folder (data/)
@@ -306,12 +331,12 @@ run dashboard_app           % Alternative application
 **Contents**: `recorded_real_time/` folder with 6 ECG recordings
 
 **Data Files** (CSV format, timestamp-based):
-1. `ECG_20260510_001229 (baseline - still).csv` - Baseline reading, stationary
-2. `ECG_20260510_003618 (artifact - walking).csv` - Motion artifact from walking
-3. `ECG_20260510_004523 (artifact - hand swing).csv` - Artifact from hand movement
-4. `ECG_20260510_005729 (artifact - tapping patches).csv` - Artifact from electrode tapping
-5. `ECG_20260510_012003 (artifact - rapid breathing).csv` - Artifact from breathing
-6. `ECG_20260511_230935 (raw - no filter).csv` - Raw unfiltered data
+1. [ECG_20260510_001229 (baseline - still).csv](data/recorded_real_time/ECG_20260510_001229%20%28baseline%20-%20still%29.csv) - Baseline reading, stationary
+2. [ECG_20260510_003618 (artifact - walking).csv](data/recorded_real_time/ECG_20260510_003618%20%28artifact%20-%20walking%29.csv) - Motion artifact from walking
+3. [ECG_20260510_004523 (artifact - hand swing).csv](data/recorded_real_time/ECG_20260510_004523%20%28artifact%20-%20hand%20swing%29.csv) - Artifact from hand movement
+4. [ECG_20260510_005729 (artifact - tapping patches).csv](data/recorded_real_time/ECG_20260510_005729%20%28artifact%20-%20tapping%20patches%29.csv) - Artifact from electrode tapping
+5. [ECG_20260510_012003 (artifact - rapid breathing).csv](data/recorded_real_time/ECG_20260510_012003%20%28artifact%20-%20rapid%20breathing%29.csv) - Artifact from breathing
+6. [ECG_20260511_230935 (raw - no filter).csv](data/recorded_real_time/ECG_20260511_230935%20%28raw%20-%20no%20filter%29.csv) - Raw unfiltered data
 
 **Data Format**: CSV with columns
 ```
@@ -369,41 +394,43 @@ Once firmware is uploaded to your microcontroller:
 
 ### Using MATLAB/Octave Dashboard
 
-**Option 1: With Recorded Data**
+**Option 1: With Recorded Data (Octave)**
 ```matlab
 % Use existing ECG recordings from data/recorded_real_time/
-cd dsp
+cd src/dsp/Octave/workspace
 run ecg_dashboard
 
 % Select data file:
 % data/recorded_real_time/ECG_20260510_001229 (baseline - still).csv
 ```
 
-**Option 2: With Real-Time Hardware**
+**Option 1b: With Recorded Data (MATLAB)**
+```matlab
+cd src/dsp/MATLAB/workspace
+run ecg_dashboard
+```
+
+**Option 2: With Real-Time Hardware (Octave or MATLAB)**
 ```matlab
 % Connect hardware and stream data
-cd dsp
+cd src/dsp/Octave/workspace
 run dashboard_app
 
-% Select COM port and view live ECG
+% For MATLAB, use:
+% cd src/dsp/MATLAB/workspace
 ```
 
-**Available Dashboard Variations**:
-```matlab
-% Main dashboard with full features
-run ecg_dashboard
+**Available Dashboard Variations (Octave workspace)**:
+- [ecg_dashboard.m](src/dsp/Octave/workspace/ecg_dashboard.m) - Main dashboard with full features
+- [ecg_dashboard_1a.m](src/dsp/Octave/workspace/ecg_dashboard_1a.m) - Alternative variant
+- [ecg_dashboard_raw.m](src/dsp/Octave/workspace/ecg_dashboard_raw.m) - Raw signal processing
+- [stream_a.m](src/dsp/Octave/workspace/stream_a.m) - Stream handler A
+- [stream_b.m](src/dsp/Octave/workspace/stream_b.m) - Stream handler B
+- [stream_c.m](src/dsp/Octave/workspace/stream_c.m) - Stream handler C
 
-% Alternative variant
-run ecg_dashboard_1a
-
-% Raw signal processing
-run ecg_dashboard_raw
-
-% Or use stream handlers
-run stream_a
-run stream_b
-run stream_c
-```
+**Available Dashboards (MATLAB workspace)**:
+- [dashboard_app.m](src/dsp/MATLAB/workspace/dashboard_app.m) - Live dashboard app
+- [ecg_dashboard.m](src/dsp/MATLAB/workspace/ecg_dashboard.m) - Main dashboard
 
 ### Data Analysis Workflow
 
@@ -428,8 +455,11 @@ grid on;
 
 **Step 3: Run dashboard analysis**
 ```matlab
-cd dsp
+cd src/dsp/Octave/workspace
 run ecg_dashboard
+
+% For MATLAB, use:
+% cd src/dsp/MATLAB/workspace
 ```
 
 ### Comparing Different Conditions
@@ -473,7 +503,7 @@ Use these to test your algorithms under various conditions!
 
 ### Firmware Configuration
 
-**Sampling Rate** (in `embedded/esp32_ad8232_streamer.ino`):
+**Sampling Rate** (in [src/embedded/esp32_ad8232_streamer.ino](src/embedded/esp32_ad8232_streamer.ino)):
 ```cpp
 const unsigned int SAMPLE_RATE_HZ = 125;  // Change this value to adjust sampling rate
 const unsigned long SERIAL_BAUD = 115200; // Serial baud rate
@@ -623,12 +653,13 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 **Last Updated**: May 2026
 
 **Completed**:
-- ✅ Embedded firmware for ESP32/Arduino (esp32_ad8232_streamer.ino)
+- ✅ Embedded firmware for ESP32/Arduino ([esp32_ad8232_streamer.ino](src/embedded/esp32_ad8232_streamer.ino))
 - ✅ Serial data streaming with CSV format
 - ✅ Lead-off detection
 - ✅ Multiple MATLAB/Octave dashboard implementations
 - ✅ Real ECG data collection (6 recordings with various conditions)
 - ✅ Signal visualization and processing scripts
+- ✅ Combined scripts ([scripts_combined.m](src_combined/scripts_combined.m), [scripts_combined.py](src_combined/scripts_combined.py))
 
 **In Progress**:
 - 🔄 Performance optimization of peak detection algorithms
@@ -659,7 +690,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 For issues, questions, or suggestions:
 1. Check the [Troubleshooting](#troubleshooting) section
 2. Review hardware wiring against [Hardware Setup](#hardware-setup)
-3. Verify firmware configuration in the `.ino` file
+3. Verify firmware configuration in [src/embedded/esp32_ad8232_streamer.ino](src/embedded/esp32_ad8232_streamer.ino)
 4. Check Arduino IDE console for compilation errors
 
 **Enjoy your ECG signal processing! 📊❤️**
